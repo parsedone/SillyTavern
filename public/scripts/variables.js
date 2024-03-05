@@ -224,14 +224,14 @@ export function replaceVariableMacros(input) {
         line = line.replace(/{{setvar::([^:]+)::([^}]+)}}/gi, (_, name, value) => {
             name = name.trim();
             setLocalVariable(name, value);
-            return '';
+            return getLocalVariable(name);
         });
 
         // Replace {{addvar::name::value}} with empty string and add value to the variable value
         line = line.replace(/{{addvar::([^:]+)::([^}]+)}}/gi, (_, name, value) => {
             name = name.trim();
             addLocalVariable(name, value);
-            return '';
+            return getLocalVariable(name);
         });
 
         // Replace {{incvar::name}} with empty string and increment the variable name by 1
@@ -256,14 +256,14 @@ export function replaceVariableMacros(input) {
         line = line.replace(/{{setglobalvar::([^:]+)::([^}]+)}}/gi, (_, name, value) => {
             name = name.trim();
             setGlobalVariable(name, value);
-            return '';
+            return getGlobalVariable(name);
         });
 
         // Replace {{addglobalvar::name::value}} with empty string and add value to the global variable value
         line = line.replace(/{{addglobalvar::([^:]+)::([^}]+)}}/gi, (_, name, value) => {
             name = name.trim();
             addGlobalVariable(name, value);
-            return '';
+            return getGlobalVariable(name);
         });
 
         // Replace {{incglobalvar::name}} with empty string and increment the global variable name by 1
